@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+echo Modprobing required kernel modules...
+sudo modprobe snd-rawmidi
+sudo modprobe snd-virmidi
+sudo modprobe snd-seq-virmidi
+echo Starting qjackctrl...
+qjackctl &
+sleep 10
+echo Starting ams...
+ams &
+sleep 5
+echo Starting vkeybd...
+vkeybd &
+sleep 5
+echo Starting ghctrl...
+./ghctrl --wiimote "00:19:1D:8C:9A:87" --device "hw:1,0"
